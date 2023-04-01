@@ -3,4 +3,6 @@ scala studies/.idea
 scala studies/project/target
 Exercise Files/learning-scala-3/target
 Exercise Files/learning-scala-3/project/target
+Exercise Files/learning-scala-3/.idea
 *.class
+Exercise Files/.idea/scala_settings.xml

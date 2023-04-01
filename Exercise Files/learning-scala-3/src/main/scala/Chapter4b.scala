@@ -1,11 +1,15 @@
 object Chapter4b {
   // case classes
-  case class Person(name: String, age: Int)
+  case class Person(name: String, age: Int=  0)
 
   val anne: Person = Person("Anne", 35)
   val anneName = anne.name
   val anneAge = anne.age
+  // case classes are immutable, so it need to create a new object.
   val anneWithAmendedAge = anne.copy(age = 36)
+
+  val baby  = Person("baby")
+
 
   // enumerations
   enum TrafficLight:
@@ -24,7 +28,7 @@ object Chapter4b {
   }
 
   enum Triathlon(val metres: Int):
-    case Swim extends Triathlon(400)
+    case Swim extends Triathlon(metres=400)
     case Cycle extends Triathlon(5000)
     case Run extends Triathlon(2500)
 
