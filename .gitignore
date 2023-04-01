@@ -1,4 +1,6 @@
 scala studies/target
 scala studies/.idea
 scala studies/project/target
+Exercise Files/learning-scala-3/target
+Exercise Files/learning-scala-3/project/target
 *.class
