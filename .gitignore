@@ -6,3 +6,7 @@ Exercise Files/learning-scala-3/project/target
 Exercise Files/learning-scala-3/.idea
 *.class
 Exercise Files/.idea/scala_settings.xml
+LinkedChallenges/.idea
+LinkedChallenges/.bsp
+LinkedChallenges/target
+LinkedChallenges/project
