@@ -20,8 +20,6 @@ object ColoredBlocks {
       stackOfBlocks = stackOfBlocks above(block)
       stack(count - 1)
 
-
-
   @main def drawBlocks(): Unit =
     stack(5).draw()
 }
