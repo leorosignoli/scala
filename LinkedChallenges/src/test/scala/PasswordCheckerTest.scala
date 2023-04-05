@@ -1,6 +1,6 @@
 package edu.linkedin.challenges
 
-import edu.linkedin.challenges.Constants.MINIMAL_PASSWORD_SIZE
+import edu.linkedin.challenges.Constants.{MINIMAL_PASSWORD_SIZE, NOT_ENOUGH_CHARS_MESSAGE, NO_LOWERCASE_CHARS_MESSAGE, NO_NUMBERS_MESSAGE, NO_UPPERCASE_CHARS_MESSAGE}
 import org.scalatest.funsuite.AnyFunSuite
 
 
@@ -12,15 +12,19 @@ class PasswordCheckerTest extends AnyFunSuite {
   }
 
   test("Should return list contaning messages when password isn't valid") {
-    assert(PasswordChecker
-      .isValidPassword("Sass2")
-      .contains("Password does not have %s chars".formatted(MINIMAL_PASSWORD_SIZE)))
-
-    assert(PasswordChecker
-      .isValidPassword("Sass2")
-      .contains("Password does not have %s chars".formatted(MINIMAL_PASSWORD_SIZE)))
-
+    val result  = PasswordChecker.isValidPassword("ask")
+    assert(result.contains(NOT_ENOUGH_CHARS_MESSAGE.formatted(MINIMAL_PASSWORD_SIZE)))
+    assert(result.contains(NO_UPPERCASE_CHARS_MESSAGE))
+    assert(result.contains(NO_NUMBERS_MESSAGE))
   }
+  test("Should return list contaning single message when password is uppercase") {
+    val result = PasswordChecker.isValidPassword("SCREAMING123")
+    assert(!result.contains(NOT_ENOUGH_CHARS_MESSAGE.formatted(MINIMAL_PASSWORD_SIZE)))
+    assert(!result.contains(NO_UPPERCASE_CHARS_MESSAGE))
+    assert(!result.contains(NO_NUMBERS_MESSAGE))
+    assert(result.contains(NO_LOWERCASE_CHARS_MESSAGE))
+  }
+
 
 
 }

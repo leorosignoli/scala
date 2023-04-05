@@ -1,7 +1,6 @@
 package edu.linkedin.challenges
 
-import edu.linkedin.challenges.Constants
-import edu.linkedin.challenges.Constants.{MINIMAL_PASSWORD_SIZE, NOT_ENOUGH_CHARS_MESSAGE, NO_LOWERCASE_CHARS_MESSAGE, NO_NUMBERS_MESSAGE, NO_UPPERCASE_CHARS_MESSAGE}
+import Constants.{MINIMAL_PASSWORD_SIZE, NOT_ENOUGH_CHARS_MESSAGE, NO_LOWERCASE_CHARS_MESSAGE, NO_NUMBERS_MESSAGE, NO_UPPERCASE_CHARS_MESSAGE}
 
 import scala.collection.mutable.ListBuffer
 
@@ -40,7 +39,7 @@ case class StringValidator(str: String = "", var errorList: ListBuffer[String] =
   }
 
   def hasLowercaseLetters: StringValidator = {
-    if (!str.exists(_.isUpper))
+    if (!str.exists(_.isLower))
       errorList.addOne(NO_LOWERCASE_CHARS_MESSAGE)
     this
   }
