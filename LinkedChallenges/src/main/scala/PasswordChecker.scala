@@ -1,37 +1,58 @@
 package edu.linkedin.challenges
 
-import PasswordChecker.MINIMAL_PASSWORD_SIZE
+import edu.linkedin.challenges.Constants
+import edu.linkedin.challenges.Constants.{MINIMAL_PASSWORD_SIZE, NOT_ENOUGH_CHARS_MESSAGE, NO_LOWERCASE_CHARS_MESSAGE, NO_NUMBERS_MESSAGE, NO_UPPERCASE_CHARS_MESSAGE}
 
-class PasswordChecker(validator : StringValidator) {
+import scala.collection.mutable.ListBuffer
 
+
+object PasswordChecker {
 
   def isValidPassword(password: String): List[String] = {
-    validator
-       .validateThat(password)
-      .hasEightChars()
-      .hasUppercaseLetters()
+    StringValidator()
+      .validateThat(password)
+      .hasEightChars
+      .hasUppercaseLetters
+      .hasLowercaseLetters
+      .hasNumbers
+      .getErrors
   }
 
 }
 
 
+case class StringValidator(str: String = "", var errorList: ListBuffer[String] = ListBuffer()) {
 
 
-class StringValidator(str: String, errorList: List[String] = List()) {
-  val MINIMAL_PASSWORD_SIZE = 8
-  def validateThat(string :String): StringValidator ={
-  return new StringValidator(string)
-  }
+  def validateThat(string: String): StringValidator = StringValidator(string)
 
-  def hasEightChars(): StringValidator = {
-    if (str.length.>=(MINIMAL_PASSWORD_SIZE)) {
-      errorList.appended("Password does not have %s chars".formatted(MINIMAL_PASSWORD_SIZE))
-    }
+
+  def hasEightChars: StringValidator = {
+    if (str.length.<(MINIMAL_PASSWORD_SIZE))
+      errorList.addOne(NOT_ENOUGH_CHARS_MESSAGE.formatted(MINIMAL_PASSWORD_SIZE))
     this
   }
 
-  def hasUppercaseLetters()
+  def hasUppercaseLetters: StringValidator = {
+    if (!str.exists(_.isUpper))
+      errorList.addOne(NO_UPPERCASE_CHARS_MESSAGE)
+    this
+  }
 
+  def hasLowercaseLetters: StringValidator = {
+    if (!str.exists(_.isUpper))
+      errorList.addOne(NO_LOWERCASE_CHARS_MESSAGE)
+    this
+  }
+
+
+  def hasNumbers: StringValidator = {
+    if (!str.exists(_.isDigit))
+      errorList.addOne(NO_NUMBERS_MESSAGE)
+    this
+  }
+
+  def getErrors: List[String] = errorList.toList
 }
 
 
